@@ -1,0 +1,161 @@
+/* global */
+*{
+
+}
+
+section{
+    background-color:black;
+    opacity:80%;
+    padding: 2rem 2rem;
+}
+
+body{
+
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+
+}
+
+.container{
+    position: relative;
+    margin: 0 auto;
+    width: 1600px;
+
+
+
+
+}
+
+.fs-footer{
+    font-size: 0.7rem;
+    text-align: left;
+    letter-spacing: 4px;
+}
+.fs-footer-icon{
+    font-size: 3rem;
+    text-align: left;
+}
+
+.bg-dark{
+    opacity: 90%;
+}
+
+.row{
+    color: aliceblue;
+    text-align: center;
+}
+
+.font-weight-normal{
+    font-weight: lighter;
+    font-size: 1.3rem;
+}
+
+.font-weight-bold{
+    font-weight: bold;
+}
+/* global */
+
+/* nav-bar */
+.navbar{
+    color:aliceblue;
+    position: fixed;
+    font-size: 1.5rem;
+    width: 100%;
+
+
+
+}
+
+.navbar-brand{
+    color: white;
+}
+
+.nav-item:hover{
+    background-color: burlywood;
+    border-radius: 10px;
+}
+.dropdown-item:hover{
+    background-color: burlywood;
+
+}
+.navbar-brand:hover{
+    background-color: burlywood;
+
+}
+
+.navbar-toggler-icon{
+    background-color: transparent;
+}
+i {
+    color: aliceblue;
+
+}
+
+#horizontal-underline{
+    position: absolute;
+    width: 98px;
+    background-color:transparent;
+    height: 4px;
+    top: 71px;
+    transition: 0.5s;
+    left:234px;
+
+}
+
+/* nav-bar */
+/*main */
+main{
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+main .container{
+display: flex;
+justify-content: center;
+}
+/*main */
+
+/* Footer */
+.about-us{
+color: #fff;
+}
+
+.about-us p{
+    font-size: 0.7rem;
+    font-weight: normal;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.about-us i{
+    font-size: 1.3rem;
+    margin: 1rem 0.5rem;
+}
+
+.services{
+color: #fff;
+}
+.services li{
+    font-size: 1rem;
+    font-weight: normal;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+    line-height: 200%;
+}
+.question{
+    text-align: left;
+    color: #fff;
+}
+.question span{
+    font-size: 0.8rem;
+}
+/* Footer */
+
