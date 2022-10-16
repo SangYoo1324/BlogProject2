@@ -8,7 +8,9 @@ import java.sql.Timestamp;
 
 @Entity
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 //@DynamicInsert// null인 값은 제외시키고 insert Query 발동
 public class User {
     @Id

@@ -1,19 +1,19 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg bg-dark position-fixed">
     <div id="horizontal-underline"></div>
+{{#user}}
     <div class="container-fluid">
-        <a class="navbar-brand" href="/board/main"><i class="fa-solid fa-pizza-slice m-1"></i>Pizza-Pizzazz</a>
+        <a id="welcome" data-status="=" class="navbar-brand" href="/user/updateForm/{{username}}"><i class="fa-solid fa-pizza-slice m-1"></i>HI, {{username}}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <!-- <span class="navbar-toggler-icon text-white"><i class="fa-solid fa-bars"></i></span> -->
             <i class="fa-solid fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active text-white" aria-current="page" href="/user/loginForm">Log In</a>
+                    <a id="write" data-status="=" class="nav-link active text-white" aria-current="page" href="/board/saveForm/{{username}}">Write</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/user/joinForm">Sign-Up</a>
+                    <a id="logout" data-status="" class= "nav-link text-white" href="/board/main">Sign Out</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,11 +27,38 @@
                     </ul>
                 </li>
             </ul>
-            <!-- <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form> -->
         </div>
     </div>
+    <input type="hidden" id="username" value="{{username}}">
+{{/user}}
+    {{^user}}
+        <div class="container-fluid">
+            <a id="write" data-status="" class="navbar-brand" href="/board/main"><i class="fa-solid fa-pizza-slice m-1"></i>Sam's Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="login" data-status="" class="nav-link active text-white" aria-current="page" href="/user/loginForm">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="signup" data-status="" class= "nav-link text-white" href="/user/joinForm">Sign-Up</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li><a class="dropdown-item text-white" href="#">Action</a></li>
+                            <li><a class="dropdown-item text-white" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider text-white"></li>
+                            <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {{/user}}
 </nav>
 <!-- navbar -->

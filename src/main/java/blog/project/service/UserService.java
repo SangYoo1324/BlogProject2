@@ -5,8 +5,8 @@ import blog.project.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 
 //스프링이 컴포넌트 스캔을 통해 bean에 등록
 @Slf4j
@@ -26,5 +26,11 @@ public class UserService {
 
         }return -1;
 
+    }
+@Transactional(readOnly = true)
+    public User login(User user) {
+       User dbIdPw = userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
+        log.info("아이디: "+dbIdPw.getUsername()+"패스워드"+dbIdPw.getPassword());
+    return dbIdPw ;
     }
 }

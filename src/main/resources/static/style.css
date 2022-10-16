@@ -68,11 +68,11 @@ a{
 
 /* nav-bar */
 .navbar{
-    color:aliceblue;
+
+   color:aliceblue;
     position: fixed;
     font-size: 1.5rem;
     width: 100%;
-
 
 
 }
@@ -97,10 +97,7 @@ a{
 .navbar-toggler-icon{
     background-color: transparent;
 }
-i {
-    color: aliceblue;
 
-}
 
 #horizontal-underline{
     position: absolute;

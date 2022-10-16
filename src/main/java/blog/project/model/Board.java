@@ -21,6 +21,7 @@ public class Board {
     private String title;
 
     @Lob // 섬머노트 라이브러리로 html태그가 섞여서 디자인되서 대용량 데이터 필요
+    @Column
     private String content;
 
     @ColumnDefault("0")
