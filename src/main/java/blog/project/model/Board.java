@@ -15,7 +15,7 @@ import java.util.List;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int boardid;
+    private Long boardid;
 
     @Column(nullable = false,length =100)
     private String title;
@@ -28,7 +28,7 @@ public class Board {
     private int count;
 
     @ManyToOne// board=many user=one
-    @JoinColumn(name = "user_Id")
+    @JoinColumn(name = "userid")
     private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)// 연관관계의 주인이 아니다(foreign key 가 아니다)
@@ -37,7 +37,7 @@ public class Board {
     @CreationTimestamp
     private Timestamp createDate;
 
-    public Board(int board_Id, String title, String content, int count, User user,List<Reply> reply,Timestamp createDate) {
+    public Board(Long board_Id, String title, String content, int count, User user,List<Reply> reply,Timestamp createDate) {
         this.boardid = board_Id;
         this.title = title;
         this.content = content;
@@ -54,5 +54,15 @@ public class Board {
         this.user = user;
         this.reply = reply;
         this.createDate = createDate;
+    }
+
+
+    public void patch(Board edited) {
+        if(edited.title != null){
+            this.title = edited.title;
+        }
+        if(edited.content != null){
+            this.content = edited.content;
+        }
     }
 }

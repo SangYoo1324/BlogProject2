@@ -33,8 +33,39 @@ public class BoardService {
 
     }
 
-
     public List<Board> allPosts() {
        return boardRepository.findAll();
+    }
+    public Board post(Long boardid){
+        Board post = boardRepository.findById(boardid).orElseThrow
+                (()->new IllegalArgumentException("해당 게시글을 찾을 수 없습니다")
+        );
+        return post;
+    }
+
+    public Board delete(Long boardid) {
+        Board target = boardRepository.findById(boardid).orElse(null);
+        boardRepository.delete(target);
+        return target;
+    }
+
+    @Transactional
+    public Board edit(Long boardid, String username, Board edited) {
+        //db에 url boardid 값의 id가 존재하지 않는 경우 null
+     Board originalPost =   boardRepository.findById(boardid).orElseThrow(()->{
+           new IllegalArgumentException("게시글이 존재하지 않습니다");
+            return null;
+        });
+     if(boardid != originalPost.getBoardid()){
+         log.info("수정하려는 게시글 id와 db게시글id가 일치하지 않습니다");
+         return null;
+     }
+
+
+        originalPost.patch(edited);
+        Board patched = boardRepository.save(originalPost);
+
+                log.info(patched.toString());
+        return patched;
     }
 }

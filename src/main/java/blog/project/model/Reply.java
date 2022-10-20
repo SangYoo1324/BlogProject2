@@ -15,24 +15,24 @@ import java.sql.Timestamp;
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int replyid;
+    private Long replyid;
 
     @Column(nullable = false, length = 200)
     private String content;
 
     @ManyToOne// 여러개의 reply 는 한개의 board에 실린다
-    @JoinColumn(name="board_Id")
+    @JoinColumn(name="boardid")
     private Board board;
 
     @ManyToOne
-    @JoinColumn(name="user_Id") // user객체를 참조하지만 sql에서는 primary key
+    @JoinColumn(name="userid") // user객체를 참조하지만 sql에서는 primary key
     //즉 id만 땡겨옴
     private User user;
 
     @CreationTimestamp
     private Timestamp createDate;
 
-    public Reply(int replyid, String content, Board board, User user, Timestamp createDate) {
+    public Reply(Long replyid, String content, Board board, User user, Timestamp createDate) {
         this.replyid = replyid;
         this.content = content;
         this.board = board;

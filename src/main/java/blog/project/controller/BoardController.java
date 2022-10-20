@@ -25,7 +25,7 @@ public class BoardController {
     //메인화면
     @GetMapping("/board/main")
     public String index(Model model) {
-        log.info(userRepository.findByUsername("aaaa").getUsername());
+
 
         return "index";
     }
@@ -62,4 +62,18 @@ public class BoardController {
     model.addAttribute("board", posts);
 return "board/postList";
 }
+
+@GetMapping("board/postList/show/{username}/{boardid}")
+    public String showPost(Model model,@PathVariable String username, @PathVariable Long boardid){
+    model.addAttribute("user", userRepository.findByUsername(username));
+   Board target =  boardService.post(boardid);
+    model.addAttribute("target", target);
+        return "board/showPost";
+}
+
+//temp
+//    @GetMapping("/board/postList/{username}")
+//    public String postListTemp(){
+//
+//    }
 }

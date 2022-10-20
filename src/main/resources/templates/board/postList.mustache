@@ -45,9 +45,11 @@
         <tbody>
         <tr>
             <th id="post-id"scope="row">{{boardid}}</th>
-            <td id="title"><a href="board/show/{{boardid}}">{{title}}</a></td>
-            <td id="content">{{{content}}}</td>
+            <td id="title"><a class="show-post-btn" href="show/{{username}}/{{boardid}}">{{title}}</a></td>
+<!--          -->
+            <td id="poster">{{{user.username}}}</td>
             <td id="post-date">{{createDate}}</td>
+
         </tr>
         </tbody>
         {{/board}}
@@ -56,7 +58,8 @@
 </main>
 
 <!--{{>layouts/footer}}-->
-<script src="/board.js"></script>
+<script src="/js/board.js"></script>
+
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>

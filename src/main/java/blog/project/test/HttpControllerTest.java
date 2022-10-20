@@ -12,7 +12,7 @@ public class HttpControllerTest {
     @GetMapping("/http/get/member")
     public String getTest(Member member){
     //builder 어노테이션으로 해당 엔티티 객체를 쉽게 생성 가능
-        //ㅋ(순서상관 없이 넣어도 됨)
+        //(순서상관 없이 넣어도 됨)
     Member m = Member.builder().username("a").password("b").email("c").build();
 
         return "get 요청"+member.getId()+","+member.getUsername();

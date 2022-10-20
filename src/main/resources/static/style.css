@@ -4,7 +4,7 @@
 }
 
 section{
-    background-color:black;
+
     opacity:80%;
     padding: 2rem 2rem;
 }
@@ -24,6 +24,7 @@ li{
 
 a{
     text-decoration: none;
+    color: black;
 
 }
 
@@ -64,6 +65,15 @@ a{
 .font-weight-bold{
     font-weight: bold;
 }
+.alert{
+z-index:1001;
+
+   display:none;
+}
+
+i{
+margin-rightL: 1rem;
+}
 /* global */
 
 /* nav-bar */
@@ -73,6 +83,7 @@ a{
     position: fixed;
     font-size: 1.5rem;
     width: 100%;
+    z-index:1000;
 
 
 }

@@ -3,7 +3,7 @@
     <div id="horizontal-underline"></div>
 {{#user}}
     <div class="container-fluid">
-        <a id="welcome" data-status="=" class="navbar-brand" href="/user/updateForm/{{username}}"><i class="fa-solid fa-pizza-slice m-1"></i>HI, {{username}}</a>
+        <a id="welcome" data-status="=" class="navbar-brand" href="/board/main/{{username}}"><i class="fa-solid fa-blog"></i> &nbsp &nbspHI, {{username}}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -20,10 +20,10 @@
                         Dropdown
                     </a>
                     <ul class="dropdown-menu bg-dark">
-                        <li><a class="dropdown-item text-white" href="#">Action</a></li>
-                        <li><a class="dropdown-item text-white" href="#">Another action</a></li>
+                        <li><a class="dropdown-item text-white" href="/board/postList/{{username}}">Dashboard</a></li>
+                        <li><a class="dropdown-item text-white" href="/user/updateForm/{{username}}">Account MNG</a></li>
                         <li><hr class="dropdown-divider text-white"></li>
-                        <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
+                        <li><a class="dropdown-item text-white" href="#">Admin Setting</a></li>
                     </ul>
                 </li>
             </ul>
@@ -33,7 +33,7 @@
 {{/user}}
     {{^user}}
         <div class="container-fluid">
-            <a id="write" data-status="" class="navbar-brand" href="/board/main"><i class="fa-solid fa-pizza-slice m-1"></i>Sam's Blog</a>
+            <a id="write" data-status="" class="navbar-brand" href="/board/main"><i class="fa-solid fa-blog mr-2"></i>Sam's Blog</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -61,4 +61,7 @@
         </div>
         {{/user}}
 </nav>
+<div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 <!-- navbar -->
