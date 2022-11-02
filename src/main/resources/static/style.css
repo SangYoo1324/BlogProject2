@@ -122,10 +122,13 @@ margin-rightL: 1rem;
 }
 
 /* nav-bar */
+section {
+padding-top: 5rem;
+}
 /*main */
 main{
-    padding-top: 5rem;
-    padding-bottom: 5rem;
+    padding-top: 4rem;
+    padding-bottom: 1rem;
 }
 main .container{
 display: flex;
@@ -167,3 +170,22 @@ color: #fff;
 }
 /* Footer */
 
+/*reply*/
+section .card .card-header {
+    display: flex;
+    padding: 0.25rem 0.25rem;
+    /*justify-content: space-between;*/
+}
+
+section .card .card-body{
+    padding: 0.25rem 0.25rem;
+}
+
+section .card .card-header .button-group{
+    margin-left: auto;
+}
+
+section.reply h3{
+    margin: 1rem 1rem;
+}
+/*reply*/

@@ -1,9 +1,12 @@
 package blog.project.service;
 
-import blog.project.model.User;
+import blog.project.dto.UserDto;
+import blog.project.entity.RoleType;
+import blog.project.entity.User;
 import blog.project.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,20 +19,25 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public int signup(User user){
+    public User signup(UserDto userDto){
+        User user = userDto.toEntiy();
+        user.setRole(RoleType.USER);//RoleType은 자동 생성이 안되서 일단 강제로 넣어줌
         try{
              userRepository.save(user);
-             return 1;
+             return user;
         }catch (Exception e){
             e.printStackTrace();
             log.info("회원가입 절차에 뭔가가 잘못됬다");
 
-        }return -1;
+        }return null;
 
     }
 @Transactional(readOnly = true)
-    public User login(User user) {
-       User dbIdPw = userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
+    public User login(UserDto userDto) {
+        log.info(userDto.toString());
+        User userInput = userDto.toEntiy();
+       User dbIdPw = userRepository.findByUsernameAndPassword(userInput.getUsername(),userInput.getPassword());
+        if(dbIdPw!=null)
         log.info("아이디: "+dbIdPw.getUsername()+"패스워드"+dbIdPw.getPassword());
     return dbIdPw ;
     }

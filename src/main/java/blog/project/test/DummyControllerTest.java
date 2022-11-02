@@ -1,7 +1,7 @@
 package blog.project.test;
 
-import blog.project.model.RoleType;
-import blog.project.model.User;
+import blog.project.entity.RoleType;
+import blog.project.entity.User;
 import blog.project.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +49,7 @@ public class DummyControllerTest {
     //한 페이지당 1건의 데이터를 리턴받게
     //http://localhost:5000/dummy/user?page=0
     @GetMapping("dummy/user")
-    public List<User> pageList(@PageableDefault(size=1, sort = "userid", direction =
+    public List<User> pageList(@PageableDefault(size=1, sort = "user_id", direction =
     Sort.Direction.ASC)Pageable pageable){
         return userRepository.findAll(pageable).getContent();
     }

@@ -1,9 +1,13 @@
 package blog.project.controller;
 
-import blog.project.model.Board;
-import blog.project.model.User;
+import blog.project.dto.ReplyDto;
+import blog.project.entity.Board;
+import blog.project.entity.User;
+import blog.project.repository.ReplyRepository;
 import blog.project.repository.UserRepository;
 import blog.project.service.BoardService;
+import blog.project.service.ReplyService;
+import ch.qos.logback.core.joran.spi.ElementSelector;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +26,8 @@ public class BoardController {
    private UserRepository userRepository;
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private ReplyService replyService ;
     //메인화면
     @GetMapping("/board/main")
     public String index(Model model) {
@@ -34,22 +40,18 @@ public class BoardController {
     public String index(Model model,@PathVariable String username) {
         User loggedinUser = userRepository.findByUsername(username);
         log.info("메인화면으로 이동하였습니다"+loggedinUser.getUsername());
+        if(isLoggedIn== true)
         model.addAttribute("user",loggedinUser );
 
-//        if(isLoggedIn==true) {
-//            log.info("isLoggedIn 은 True입니다");
-//            model.addAttribute("loginStatus", "loggin");
-//
-//        }else{
-//            log.info("isLoggedIn 은 false입니다");
-//        }
+
+
     return "index";
 }
 
 @GetMapping("/board/saveForm/{username}")
     public String saveForm(Model model, @PathVariable String username){
 
-
+    if(isLoggedIn== true)
         model.addAttribute("user", userRepository.findByUsername(username));
 
         return "board/saveForm";
@@ -57,23 +59,37 @@ public class BoardController {
 
 @GetMapping("/board/postList/{username}")
     public String postList(Model model,@PathVariable String username){
-    model.addAttribute("user", userRepository.findByUsername(username));
-    List<Board> posts=  boardService.allPosts();
-    model.addAttribute("board", posts);
-return "board/postList";
+        if(isLoggedIn== true){
+            model.addAttribute("user", userRepository.findByUsername(username));
+            List<Board> posts=  boardService.allPosts();
+            model.addAttribute("board", posts);
+            return "board/postList";
+        }
+    else{
+            log.info("로그인 없이 주소이동했습니다");
+            return "redirect:/board/main";
+        }
+
+
 }
 
-@GetMapping("board/postList/show/{username}/{boardid}")
-    public String showPost(Model model,@PathVariable String username, @PathVariable Long boardid){
-    model.addAttribute("user", userRepository.findByUsername(username));
-   Board target =  boardService.post(boardid);
-    model.addAttribute("target", target);
+@GetMapping("board/postList/show/{username}/{board_id}")
+    public String showPost(Model model,@PathVariable String username, @PathVariable Long board_id){
+    if(isLoggedIn== true){
+        model.addAttribute("user", userRepository.findByUsername(username));
+        Board target =  boardService.post(board_id);
+        model.addAttribute("target", target);
+        List<ReplyDto> replies = replyService.replyList(board_id);
+        model.addAttribute("Reply", replies);
         return "board/showPost";
+    }
+  else{
+      log.info("로그인 없이 주소이동했습니다");
+        return "redirect:/board/main";
+    }
+
+
 }
 
-//temp
-//    @GetMapping("/board/postList/{username}")
-//    public String postListTemp(){
-//
-//    }
+
 }

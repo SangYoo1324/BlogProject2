@@ -1,6 +1,6 @@
 package blog.project.repository;
 
-import blog.project.model.User;
+import blog.project.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

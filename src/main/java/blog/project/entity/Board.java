@@ -1,4 +1,4 @@
-package blog.project.model;
+package blog.project.entity;
 
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -15,7 +15,7 @@ import java.util.List;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long boardid;
+    private Long board_id;
 
     @Column(nullable = false,length =100)
     private String title;
@@ -28,32 +28,32 @@ public class Board {
     private int count;
 
     @ManyToOne// board=many user=one
-    @JoinColumn(name = "userid")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)// 연관관계의 주인이 아니다(foreign key 가 아니다)
     //즉, db에 컬럼 만들지 말고, board에서 참조해서 사용
     private List<Reply> reply;
     @CreationTimestamp
-    private Timestamp createDate;
+    private Timestamp create_date;
 
-    public Board(Long board_Id, String title, String content, int count, User user,List<Reply> reply,Timestamp createDate) {
-        this.boardid = board_Id;
+    public Board(Long board_id, String title, String content, int count, User user,List<Reply> reply,Timestamp create_date) {
+        this.board_id = board_id;
         this.title = title;
         this.content = content;
         this.count = count;
         this.user = user;
         this.reply = reply;
-        this.createDate = createDate;
+        this.create_date = create_date;
     }
 @Builder
-    public Board( String title, String content, int count, User user, List<Reply>reply,Timestamp createDate) {
+    public Board( String title, String content, int count, User user, List<Reply>reply,Timestamp create_date) {
         this.title = title;
         this.content = content;
         this.count = count;
         this.user = user;
         this.reply = reply;
-        this.createDate = createDate;
+        this.create_date = create_date;
     }
 
 

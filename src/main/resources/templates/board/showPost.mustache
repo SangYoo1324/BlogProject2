@@ -29,58 +29,104 @@
 </head>
 <body>
 {{>layouts/header}}
+<section class="showPost">
+<div class="container">
 
-<main>
     <table class="table">
         <thead>
         <tr>
             <th scope="col">POST</th>
-
         </tr>
         </thead>
-        {{#target}}
+
         <tbody>
         <tr>
             <th scope="row"><p>Title</p>
-                <p>{{title}}</p></th>
-            <br><hr>
+                <p>{{target.title}}</p></th>
+<!--            <br><hr>-->
         </tr>
         <tr>
             <th scope="row">
                 <p>Poster</p>
                 <p>{{target.user.username}}</p>
                 </th>
-            <br><hr>
+<!--            <br><hr>-->
         </tr>
         <tr>
             <th scope="row"><p>Content</p>
 
-                <p>{{{content}}}</p></th>
-            <br><hr>
+                <p>{{{target.content}}}</p></th>
+<!--            <br><hr>-->
         </tr>
         </tbody>
-            {{/target}}
+
+
     </table>
-    <button id="btn-delete" data-post-boardid={{target.boardid}} data-post-username="{{target.user.username}}" class="btn btn-danger mr-2"> Delete</button>
+
+    <button id="btn-delete" data-post-board_id={{target.board_id}} data-post-username="{{target.user.username}}" class="btn btn-danger mr-2"> Delete</button>
     <button id="btn-back" class="btn btn-light mr-2"><a href="/board/postList/{{user.username}}">Back</a></button>
     <button id="btn-edit"
-            data-post-boardid="{{target.boardid}}"
+            data-post-board_id="{{target.board_id}}"
             data-post-username="{{target.user.username}}"
             data-current-username="{{user.username}}"
             data-post-title="{{target.title}}"
             data-post-content="{{target.content}}"
             data-bs-toggle="modal"
-            data-bs-target="#edit-modal"
+            data-bs-target="#post-edit-modal"
 
-            class="btn btn-primary"> Edit</button>
-</main>
-<!-- Button trigger modal -->
+            class="btn btn-primary">Edit</button>
+</div>
+    </section>
+<!--reply-->
+<section class="reply">
+    <div class="container">
+        <form>
+            <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Write Comment</label>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+                <input id="reply-content" name="contentslot" type="text" class="form-control summernote">
+            </div>
+        </form>
+        <button id="reply-btn-post" class="btn btn-primary"
+                data-reply-board_id="{{target.board_id}}"
+                data-reply-user_id="{{user.user_id}}"
+        >Post</button>
+    </div>
+
+    <h3>Comments</h3>
+    {{#Reply}}
+    <div class="container mb-2">
+        <div class="card">
+            <div class="card-header">
+                <div><h4>{{reply_id}}</h4></div>
+                <div class="button-group">
+                <button id="reply-btn-delete" type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-info"
+                        id="reply-btn-edit"
+                        data-bs-toggle="modal"
+                        data-bs-target="#reply-edit-modal"
+                        data-reply-content="{{content}}"
+                >Edit</button>
+            </div>
 
 
-<!-- Modal -->
-<div class="modal fade" id="edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div id="modal-user-boardid-identifier" data-username="{{user.username}}"
-         data-boardid="{{target.boardid}}" class="modal-dialog">
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{{content}}}</p>
+            </div>
+        </div>
+    </div>
+        {{/Reply}}Reply}}
+</section>
+
+<!--reply-->
+
+<!-- Post Modal -->
+<div class="modal fade" id="post-edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="modal-user-board_id-identifier" data-username="{{user.username}}"
+         data-board_id="{{target.board_id}}" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Post</h1>
@@ -98,7 +144,6 @@
                     </div>
                 </form>
 
-                </main>
             </div>
             <div class="modal-footer">
                 <button id="btn-edit-modal" class="btn btn-primary" data-bs-dismiss="modal">Post</button>
@@ -107,10 +152,37 @@
     </div>
 </div>
 
-<!--    modal-->
+<!-- Post modal-->
+
+<!--reply modal-->
+<div class="modal fade" id="reply-edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div id="modal-user-board_id-identifier" data-username="{temp}"
+         data-board_id="{temp}" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Post</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+                        <input id="reply-modal-content" name="contentslot" type="text" class="form-control summernote">
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button id="btn-reply-edit-modal" class="btn btn-primary" data-bs-dismiss="modal">Post</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--reply modal-->
 <!--{{>layouts/footer}}-->
 
 <script src="/js/board.js"></script>
+<script src="/js/reply.js"></script>
 <script src="/js/boardShowPost.js"></script>
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"

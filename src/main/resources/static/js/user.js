@@ -62,7 +62,9 @@ alert(JSON.stringify(error));
     console.log(resp);
     window.location.reload();
     location.href="/board/main/"+data.username;
-    }).fail(function(error){//실패 시 실행함수
+    }).fail(function(error){
+        //실패 시 실행함수
+        alert("Login Fail");
     alert(JSON.stringify(error));
     });
 
@@ -96,17 +98,7 @@ alert(JSON.stringify(error));
 
 }
 
-//Login 시 navbar JS
-//let welcome = document.getElementById("welcome");
-//let write = document.getElementById("write");
-//let logout = document.getElementById("logout");
-//
-//if( write.dataset.status== "loggin"){
-//    write.innerHTML="Write";
-//    logout.innerHTML="Logout";
-//    console.log("로그인 되었습니다");
-//
-//}
+
 console.log("연결확인");
 index.init();
 

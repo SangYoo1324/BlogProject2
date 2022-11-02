@@ -1,22 +1,14 @@
 package blog.project.api;
 
-import blog.project.controller.UserController;
 import blog.project.dto.ResponseDto;
-import blog.project.model.Board;
-import blog.project.model.RoleType;
-import blog.project.model.User;
+import blog.project.entity.Board;
 import blog.project.service.BoardService;
 import blog.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
-import static blog.project.controller.UserController.isLoggedIn;
 
 @Slf4j
 @RestController
@@ -36,16 +28,16 @@ public class BoardApiController {
     }
 
     //Delete Post
-    @DeleteMapping("/api/board/deletePost/{username}/{boardid}")
-    public ResponseEntity<Board> deletePost(@PathVariable Long boardid){
-    Board deletedBoard=boardService.delete(boardid);
+    @DeleteMapping("/api/board/deletePost/{username}/{board_id}")
+    public ResponseEntity<Board> deletePost(@PathVariable Long board_id){
+    Board deletedBoard=boardService.delete(board_id);
         return ResponseEntity.status(HttpStatus.OK).body(deletedBoard);
     }
 
     //Edit Post
-    @PatchMapping("/api/board/editPost/{username}/{boardid}")
-    public ResponseEntity<Board> deletePost(@PathVariable Long boardid, @PathVariable String username, @RequestBody Board edition){
-           Board patched = boardService.edit(boardid,username,edition);
+    @PatchMapping("/api/board/editPost/{username}/{board_id}")
+    public ResponseEntity<Board> deletePost(@PathVariable Long board_id, @PathVariable String username, @RequestBody Board edition){
+           Board patched = boardService.edit(board_id,username,edition);
         return ResponseEntity.status(HttpStatus.OK).body(patched);
     }
 

@@ -13,7 +13,7 @@ let index = {
         console.log("로그아웃 버튼 클릭")
         this.logout();
         });
-        //게시글 psot
+        //게시글 post
         $("#btn-post").on("click", ()=>{
         this.post();
         });
@@ -40,7 +40,7 @@ let data= {
 title: $("#title").val(),
 content: $("#content").summernote('code'),// summernote 텍스트 데이터 받아오는 방법
 username: $("#username").val()
-}
+};
 console.log(data);
 //ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert요청
 //fetch랑 비슷하다 보면 댐(data 객체를 받아서 java controller로 던짐)
@@ -69,7 +69,7 @@ alert("post에 무언가가 잘못되었습니다");
         console.log($("#btn-delete"));
         let data={
        username: $("#btn-delete").attr("data-post-username"),
-        boardid: $("#btn-delete").attr("data-post-boardid")
+        board_id: $("#btn-delete").attr("data-post-board_id")
         };
 
 //위하고 같은 방식(JavaScript)
@@ -77,11 +77,11 @@ alert("post에 무언가가 잘못되었습니다");
 //                       console.log(deletebtn);
 //       let data={
 //         username: deletebtn.getAttribute("data-post-username"),
-//         boardid:  deletebtn.getAttribute("data-post-boardid")
+//         board_id:  deletebtn.getAttribute("data-post-board_id")
 //       };
         $.ajax({
         type: "DELETE",
-        url: "/api/board/deletePost/"+data.username+"/"+data.boardid,
+        url: "/api/board/deletePost/"+data.username+"/"+data.board_id,
         data: JSON.stringify(data),
          contentType:"application/json; charset=utf-8",
          dataType: "json"
@@ -150,10 +150,10 @@ alert("post에 무언가가 잘못되었습니다");
                 },
  edit: function(){
  console.log("edit 요청이 왔습니다");
- //api 요청 주소에 username하고 boardid가 필요해서 가져옴
+ //api 요청 주소에 username하고 board_id가 필요해서 가져옴
 
- let username= $("#modal-user-boardid-identifier").attr("data-username");
- let boardid =  $("#modal-user-boardid-identifier").attr("data-boardid");
+ let username= $("#modal-user-board_id-identifier").attr("data-username");
+ let board_id =  $("#modal-user-board_id-identifier").attr("data-board_id");
 
  let data={
  title: $("#modal-title").val(),
@@ -161,14 +161,14 @@ alert("post에 무언가가 잘못되었습니다");
      }
        $.ajax({
          type:"Patch",
-         url:`/api/board/editPost/${username}/${boardid}`,
+         url:`/api/board/editPost/${username}/${board_id}`,
          data: JSON.stringify(data),
          contentType:"application/json; charset=utf-8",
          dataType: "json"
 
          }).done(function(response){
          alert("수정 완료");
-         location.href=`/board/postList/show/${username}/${boardid}`;
+         location.href=`/board/postList/show/${username}/${board_id}`;
          }).fail(function(error){
          alert("수정이 안됬습니다");
 
@@ -179,10 +179,16 @@ alert("post에 무언가가 잘못되었습니다");
 }
 
 //Edit Modal Event 처리(Edit Modal이 뜨면 원래 post 내용 반영)
+//Post modal fill
 function modalFormFill (){
 $("#modal-title").val($("#btn-edit").attr("data-post-title"));
 $("#modal-content").summernote('code',$("#btn-edit").attr("data-post-content"));
 };
+
+//Reply Modal fill
+function replyModalFill(){
+    $("#reply-modal-content").summernote('code',$("#reply-btn-edit").attr("data-reply-content"));
+}
 
 
 
@@ -190,7 +196,9 @@ $("#modal-content").summernote('code',$("#btn-edit").attr("data-post-content"));
 
 
 index.init();
+//modal Filling button
 modalFormFill();
+replyModalFill();
 
 
 
