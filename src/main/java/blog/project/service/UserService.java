@@ -2,11 +2,10 @@ package blog.project.service;
 
 import blog.project.dto.UserDto;
 import blog.project.entity.RoleType;
-import blog.project.entity.User;
+import blog.project.entity.Users;
 import blog.project.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,8 +18,8 @@ public class UserService {
     private UserRepository userRepository;
 
     @Transactional
-    public User signup(UserDto userDto){
-        User user = userDto.toEntiy();
+    public Users signup(UserDto userDto){
+        Users user = userDto.toEntiy();
         user.setRole(RoleType.USER);//RoleType은 자동 생성이 안되서 일단 강제로 넣어줌
         try{
              userRepository.save(user);
@@ -33,10 +32,10 @@ public class UserService {
 
     }
 @Transactional(readOnly = true)
-    public User login(UserDto userDto) {
+    public Users login(UserDto userDto) {
         log.info(userDto.toString());
-        User userInput = userDto.toEntiy();
-       User dbIdPw = userRepository.findByUsernameAndPassword(userInput.getUsername(),userInput.getPassword());
+        Users userInput = userDto.toEntiy();
+       Users dbIdPw = userRepository.findByUsernameAndPassword(userInput.getUsername(),userInput.getPassword());
         if(dbIdPw!=null)
         log.info("아이디: "+dbIdPw.getUsername()+"패스워드"+dbIdPw.getPassword());
     return dbIdPw ;

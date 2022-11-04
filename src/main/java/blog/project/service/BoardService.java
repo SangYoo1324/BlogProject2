@@ -1,7 +1,7 @@
 package blog.project.service;
 
 import blog.project.entity.Board;
-import blog.project.entity.User;
+import blog.project.entity.Users;
 import blog.project.repository.BoardRepository;
 import blog.project.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +24,7 @@ public class BoardService {
     @Transactional
     public Board write(Board board, String username){//title, content
       log.info(board.toString());
-     User user= userRepository.findByUsername(username);
+     Users user= userRepository.findByUsername(username);
      board.setUser(user);
 
    Board saved= boardRepository.save(board);

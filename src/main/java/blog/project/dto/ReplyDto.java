@@ -2,7 +2,7 @@ package blog.project.dto;
 
 import blog.project.entity.Board;
 import blog.project.entity.Reply;
-import blog.project.entity.User;
+import blog.project.entity.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,7 +29,7 @@ public class ReplyDto {
         this.create_date = create_date;
     }
 
-    public Reply toEntity( User user, Board board) {
+    public Reply toEntity(Users user, Board board) {
         return new Reply(null, this.content,board, user, null);
 
     }

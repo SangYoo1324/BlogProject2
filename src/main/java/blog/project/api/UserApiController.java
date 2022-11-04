@@ -1,10 +1,7 @@
 package blog.project.api;
 
-import blog.project.controller.UserController;
-import blog.project.dto.ResponseDto;
 import blog.project.dto.UserDto;
-import blog.project.entity.RoleType;
-import blog.project.entity.User;
+import blog.project.entity.Users;
 import blog.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,19 +22,19 @@ public class UserApiController {
 
 
     @PostMapping("/api/user")
-public ResponseEntity<User> save(@RequestBody UserDto userDto){
+public ResponseEntity<Users> save(@RequestBody UserDto userDto){
         //실제로 DB에 insert를 하고 return
 
-      User result=  userService.signup(userDto);
+      Users result=  userService.signup(userDto);
         log.info("userAPIController:  회원가입 정보가 db에 저장되었습니다");
         return ResponseEntity.status(HttpStatus.OK).body(result);
 }
 
 @PostMapping("/api/user/login")
-    public ResponseEntity<User> login(@RequestBody UserDto userDto){
+    public ResponseEntity<Users> login(@RequestBody UserDto userDto){
         log.info("userAPIController:  Login 호출됨");
         isLoggedIn= true;
-        User principal = userService.login(userDto);
+        Users principal = userService.login(userDto);
         return (principal != null)?ResponseEntity.status(HttpStatus.OK).body(principal):
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 

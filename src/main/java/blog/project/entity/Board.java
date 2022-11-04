@@ -29,7 +29,7 @@ public class Board {
 
     @ManyToOne// board=many user=one
     @JoinColumn(name = "user_id")
-    private User user;
+    private Users user;
 
     @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)// 연관관계의 주인이 아니다(foreign key 가 아니다)
     //즉, db에 컬럼 만들지 말고, board에서 참조해서 사용
@@ -37,7 +37,7 @@ public class Board {
     @CreationTimestamp
     private Timestamp create_date;
 
-    public Board(Long board_id, String title, String content, int count, User user,List<Reply> reply,Timestamp create_date) {
+    public Board(Long board_id, String title, String content, int count, Users user, List<Reply> reply, Timestamp create_date) {
         this.board_id = board_id;
         this.title = title;
         this.content = content;
@@ -47,7 +47,7 @@ public class Board {
         this.create_date = create_date;
     }
 @Builder
-    public Board( String title, String content, int count, User user, List<Reply>reply,Timestamp create_date) {
+    public Board(String title, String content, int count, Users user, List<Reply>reply, Timestamp create_date) {
         this.title = title;
         this.content = content;
         this.count = count;

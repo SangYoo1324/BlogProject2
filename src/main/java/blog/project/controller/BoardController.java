@@ -2,12 +2,10 @@ package blog.project.controller;
 
 import blog.project.dto.ReplyDto;
 import blog.project.entity.Board;
-import blog.project.entity.User;
-import blog.project.repository.ReplyRepository;
+import blog.project.entity.Users;
 import blog.project.repository.UserRepository;
 import blog.project.service.BoardService;
 import blog.project.service.ReplyService;
-import ch.qos.logback.core.joran.spi.ElementSelector;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +36,7 @@ public class BoardController {
     //로그인 됬을때 메인 화면
     @GetMapping("/board/main/{username}")
     public String index(Model model,@PathVariable String username) {
-        User loggedinUser = userRepository.findByUsername(username);
+        Users loggedinUser = userRepository.findByUsername(username);
         log.info("메인화면으로 이동하였습니다"+loggedinUser.getUsername());
         if(isLoggedIn== true)
         model.addAttribute("user",loggedinUser );

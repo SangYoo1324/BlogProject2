@@ -39,7 +39,15 @@ public class ReplyApiController {
     return ResponseEntity.status(HttpStatus.OK).body(createdReplyDto);
     }
     //댓글 수정
+    @PatchMapping("/api/reply/edit/{board_id}/{user_id}/{reply_id}")
+    public ResponseEntity<ReplyDto> editReply(@PathVariable Long board_id,
+                                              @PathVariable Long user_id,
+                                              @PathVariable Long reply_id,
+                                              @RequestBody ReplyDto patchDto){
+    ReplyDto patchedDto = replyService.editReply(board_id, user_id, reply_id, patchDto);
 
+    return ResponseEntity.status(HttpStatus.OK).body(patchedDto);
+    }
     //댓글 삭제
     @DeleteMapping("/api/reply/delete/{board_id}/{user_id}/{reply_id}")
     public ResponseEntity<ReplyDto> deleteReply(@PathVariable Long board_id,

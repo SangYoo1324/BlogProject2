@@ -3,7 +3,7 @@ package blog.project.service;
 import blog.project.dto.ReplyDto;
 import blog.project.entity.Board;
 import blog.project.entity.Reply;
-import blog.project.entity.User;
+import blog.project.entity.Users;
 import blog.project.repository.BoardRepository;
 import blog.project.repository.ReplyRepository;
 import blog.project.repository.UserRepository;
@@ -36,7 +36,7 @@ public class ReplyService {
 @Transactional
     public ReplyDto createReply(Long board_id,Long user_id, ReplyDto replyDto) {
         //get userEntity , boardEntity
-        User poster = userRepository.findById(user_id).orElse(null);
+        Users poster = userRepository.findById(user_id).orElse(null);
         Board board = boardRepository.findById(board_id).orElse(null);
         // replyDto to replyEntity
         Reply postTarget = replyDto.toEntity(poster,board);
@@ -56,5 +56,19 @@ public class ReplyService {
         replyRepository.delete(target);
 
         return target.toDto();
+    }
+    @Transactional
+    public ReplyDto editReply(Long board_id, Long user_id, Long reply_id,ReplyDto patchDto){
+        //댓글 조회
+        Reply target = replyRepository.findById(reply_id).orElse(null);
+        //target에 patchDto를 entity로 바꿔서 patch 해줌
+        Reply patchedEntity = target.patch(patchDto, reply_id);
+        //패치된 reply db저장
+        replyRepository.save(patchedEntity);
+        //dto로 전환
+        ReplyDto patchedDto = patchedEntity.toDto();
+
+        return patchedDto;
+
     }
 }

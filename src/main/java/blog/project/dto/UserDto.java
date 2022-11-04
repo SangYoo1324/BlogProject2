@@ -1,12 +1,9 @@
 package blog.project.dto;
 
-import blog.project.entity.RoleType;
-import blog.project.entity.User;
+import blog.project.entity.Users;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.sql.Timestamp;
 
 
 @Getter
@@ -30,7 +27,7 @@ public class UserDto {
     }
 
 
-    public User toEntiy() {
-        return new User(this.user_id,this.username,this.password,this.email, null);
+    public Users toEntiy() {
+        return new Users(this.user_id,this.username,this.password,this.email, null);
     }
 }
