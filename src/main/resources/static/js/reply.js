@@ -7,8 +7,11 @@ let replyIndex = {
         $("#btn-reply-edit-modal").on("click",()=>{
            this.editReply();
         });
-        $(".reply-btn-delete").on("click",()=>{
-            this.deleteReply();
+
+        $(".reply-btn-delete").on("click",(e)=>{ //delete 버튼이 여러개 선택됨
+           const targetBtn= e.target; //클릭이벤트에 관련된 버튼 가져오기
+           console.log(targetBtn);
+            this.deleteReply(targetBtn);
         });
 
     },
@@ -37,12 +40,14 @@ let replyIndex = {
 
     },
 
-    deleteReply:function() {
+    deleteReply:function(targetBtn) {
+
+
         console.log("댓글이 삭제되었습니다");
         let data = {
-            reply_id: $('.reply-btn-delete').attr("data-reply-reply_id"),
-            board_id: $('.reply-btn-delete').attr("data-reply-board_id"),
-            user_id: $('.reply-btn-delete').attr("data-reply-user_id")
+            reply_id: targetBtn.getAttribute("data-reply-reply_id"),
+            board_id: targetBtn.getAttribute("data-reply-board_id"),
+            user_id: targetBtn.getAttribute("data-reply-user_id")
 
         }
         $.ajax({

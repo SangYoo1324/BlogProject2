@@ -3,6 +3,7 @@ package blog.project.api;
 import blog.project.dto.ResponseDto;
 import blog.project.entity.Board;
 import blog.project.service.BoardService;
+import blog.project.service.FileService;
 import blog.project.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +18,15 @@ public class BoardApiController {
     private UserService userService;
     @Autowired
     private BoardService boardService;
+    @Autowired
+    private FileService fileService;
+
 //Get은 boardController에서 바로
 //Post
     @PostMapping("/api/board/savePost/{username}")
     public ResponseDto<Integer> savePost(@RequestBody Board board, @PathVariable String username){
         //실제로 DB에 insert를 하고 return
         boardService.write(board, username);
-
         return new ResponseDto<Integer>(HttpStatus.OK, 1);
     }
 
@@ -31,6 +34,7 @@ public class BoardApiController {
     @DeleteMapping("/api/board/deletePost/{username}/{board_id}")
     public ResponseEntity<Board> deletePost(@PathVariable Long board_id){
     Board deletedBoard=boardService.delete(board_id);
+
         return ResponseEntity.status(HttpStatus.OK).body(deletedBoard);
     }
 

@@ -28,10 +28,83 @@
     <title>document</title>
 </head>
 <body>
-{{>layouts/header}}
-<section class="showPost">
-<div class="container">
+<!-- header -->
+<nav class="navbar navbar-expand-lg bg-dark position-fixed">
+    <div id="horizontal-underline"></div>
+    {{#currentUser}}
+        <div class="container-fluid">
+            <div class="navbar-logo">
+                <a id="write" data-status="" class="navbar-brand" href="/board/main/{{username}}"><i class="fa-solid fa-blog mr-2"></i>&nbsp &nbspHI, {{username}}</a>
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="write" data-status="=" class="nav-link active text-white" aria-current="page" href="/board/saveForm/{{username}}">Write</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="logout" data-status="" class= "nav-link text-white" href="/board/main">Sign Out</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li><a class="dropdown-item text-white" href="/board/postList/{{username}}">Dashboard</a></li>
+                            <li><a class="dropdown-item text-white" href="/user/updateForm/{{username}}">Account MNG</a></li>
+                            <li><hr class="dropdown-divider text-white"></li>
+                            <li><a class="dropdown-item text-white" href="#">Admin Setting</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <input type="hidden" id="username" value="{{username}}">
+    {{/currentUser}}
+    {{^currentUser}}
+        <div class="container-fluid">
+            <div class="navbar-logo">
+                <a id="write" data-status="" class="navbar-brand" href="/board/main"><i class="fa-solid fa-blog mr-2"></i>Sam's Blog</a>
+            </div>
 
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="login" data-status="" class="nav-link active text-white" aria-current="page" href="/user/loginForm">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="signup" data-status="" class= "nav-link text-white" href="/user/joinForm">Sign-Up</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li><a class="dropdown-item text-white" href="#">Action</a></li>
+                            <li><a class="dropdown-item text-white" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider text-white"></li>
+                            <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    {{/currentUser}}
+</nav>
+<div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<!-- header -->
+
+
+<section class="showPost main">
+<div class="container">
+<!--Post Form-->
     <table class="table">
         <thead>
         <tr>
@@ -62,22 +135,25 @@
 
 
     </table>
+    <!--Post Form-->
 
+<!--    Delete/Edit/Back Btn-->
     <button id="btn-delete" data-post-board_id={{target.board_id}} data-post-username="{{target.user.username}}" class="btn btn-danger mr-2"> Delete</button>
-    <button id="btn-back" class="btn btn-light mr-2"><a href="/board/postList/{{user.username}}">Back</a></button>
+    <button id="btn-back" class="btn btn-light mr-2"><a href="/board/postList/{{currentUser.username}}">Back</a></button>
     <button id="btn-edit"
             data-post-board_id="{{target.board_id}}"
             data-post-username="{{target.user.username}}"
-            data-current-username="{{user.username}}"
+            data-current-username="{{currentUser.username}}"
             data-post-title="{{target.title}}"
             data-post-content="{{target.content}}"
             data-bs-toggle="modal"
             data-bs-target="#post-edit-modal"
 
             class="btn btn-primary">Edit</button>
+    <!--    Delete/Edit/Back Btn-->
 </div>
     </section>
-<!--reply-->
+<!--reply Form-->
 <section class="reply">
     <div class="container">
         <form>
@@ -91,31 +167,38 @@
         </form>
         <button id="reply-btn-post" class="btn btn-primary"
                 data-reply-board_id="{{target.board_id}}"
-                data-reply-user_id="{{user.user_id}}"
+                data-reply-user_id="{{currentUser.user_id}}"
         >Post</button>
     </div>
+    <!--reply Form-->
 
+<!--    Reply List-->
     <h3>Comments</h3>
     {{#Reply}}
     <div class="container mb-2">
         <div class="card">
             <div class="card-header">
-                <div><h4>{{reply_id}}</h4></div>
+                <div><h4>{{user.username}}</h4></div>
                 <div class="button-group">
+<!--                    // Edit,Delete button-->
                 <button  type="button"
                         class="reply-btn-delete btn btn-danger"
                         data-reply-reply_id = "{{reply_id}}"
                         data-reply-board_id = "{{target.board_id}}"
                         data-reply-user_id = "{{user.user_id}}"
+                         data-current-user_id="{{currentUser.user_id}}"
                 >Delete</button>
-                <button type="button" class="btn btn-info"
-                        id="reply-btn-edit"
+                <button type="button" class="reply-btn-edit btn btn-info"
                         data-bs-toggle="modal"
                         data-bs-target="#reply-edit-modal"
                         data-reply-content="{{content}}"
+                        data-reply-reply_id = "{{reply_id}}"
+                        data-reply-board_id = "{{target.board_id}}"
+                        data-reply-user_id = "{{user.user_id}}"
+                        data-current-user_id="{{currentUser.user_id}}"
                 >Edit</button>
             </div>
-
+                <!--                    // Edit,Delete button-->
 
             </div>
             <div class="card-body">
@@ -125,12 +208,11 @@
     </div>
         {{/Reply}}
 </section>
-
-<!--reply-->
+<!--    Reply List -->
 
 <!-- Post Modal -->
 <div class="modal fade" id="post-edit-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div id="modal-user-board_id-identifier" data-username="{{user.username}}"
+    <div id="modal-user-board_id-identifier" data-username="{{currentUser.username}}"
          data-board_id="{{target.board_id}}" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -194,20 +276,45 @@
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
 <script>
-      $('.summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
+    $(document).ready(function() {
+        $('.summernote').summernote({
+            height : 300,
+            minHeight : null,
+            maxHeight : null,
+            focus : true,
+            callbacks : {
+                onImageUpload : function(files) {  //이미지가 업로드 아이콘 클릭 될때만 발동되는 함수형 객체
+                    for (var i = 0; i < files.length; i++) {
+                        sendFile(files[i], this);  //this =  <textarea class="form-control summernote" id="content" name="content" placeholder="content" maxlength="140" rows="7" style="display: none;"></textarea>
+                    }
+
+                }
+            }
+        });
+    });
+
+    function sendFile(file, el){
+    var form_data = new FormData();
+    form_data.append('file',file);  // html form 형태로 파일을 담음
+        $.ajax({
+            data: form_data,
+            type: "POST",
+            url: '/file',
+            cache: false,
+            contentType: false,
+            enctype : 'multipart/form-data', // 인코딩할때 multipart로 인코딩 and form-data
+            processData : false,
+            success: function(url){// url = ajax통신 종료 후 받는 리턴 객체( 리포지토리에서 받아온 이미지) 주소
+                //file/n
+                console.log(url);
+                $(el).summernote('insertImage',url, function(file){
+                    file.css('width',"50%");
+                });
+
+            }
+        })
+
+    }
     </script>
 </body>
 </html>

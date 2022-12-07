@@ -1,0 +1,373 @@
+/* global */
+*{
+
+}
+
+.ml-7{
+    margin-left: 3.5rem;
+}
+.w-90{
+    width: 90%;
+    margin: 0 auto;
+}
+/* global */
+/* section Title common css */
+section{
+    position: relative;
+    font-family: 'Poppins', sans-serif;
+    padding: 5rem 0;
+    width: 100%;
+
+    /*padding: 3rem 3rem;*/
+}
+
+section:nth-child(2n){
+    background-image: url("/images/2ndChildBg.png");
+    background-size: cover;
+}
+
+ .title{
+    margin-bottom: 3rem;
+    position: relative;
+    opacity: 0;
+    transition: all 3s;
+    /* animation: slide 1.5s ease-in-out; */
+
+}
+
+section .title h4{
+    font-size: 2rem;
+    color: lightcoral;
+    position: relative;
+}
+
+section .title h2{
+    font-size: 1.5rem;
+
+}
+/* section Title common css */
+
+
+
+
+body{
+
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+
+}
+
+li{
+    list-style: none;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+
+}
+
+.container{
+    position: relative;
+    margin: 0 auto;
+    /*width: 1600px;*/
+
+
+
+
+}
+
+.fs-footer{
+    font-size: 0.7rem;
+    text-align: left;
+    letter-spacing: 4px;
+}
+.fs-footer-icon{
+    font-size: 3rem;
+    text-align: left;
+}
+
+.bg-dark{
+    opacity: 90%;
+}
+
+.row{
+    /*color: aliceblue;*/
+    text-align: center;
+}
+
+.font-weight-normal{
+    font-weight: lighter;
+    font-size: 1.3rem;
+}
+
+.font-weight-bold{
+    font-weight: bold;
+}
+.alert{
+   display:none;
+}
+
+i{
+margin-right: 1rem;
+}
+/* global */
+
+/* nav-bar */
+.navbar{
+
+   color:aliceblue;
+    position: fixed;
+    font-size: 1.5rem;
+    width: 100%;
+    z-index:1000;
+
+
+}
+
+.navbar-brand{
+    color: white;
+}
+
+.nav-item:hover{
+    background-color: burlywood;
+    border-radius: 10px;
+}
+.dropdown-item:hover{
+    background-color: burlywood;
+
+}
+.navbar-logo:hover{
+    background-color: burlywood;
+    border-radius: 10px;
+}
+
+.navbar-toggler-icon{
+    background-color: transparent;
+}
+
+
+#horizontal-underline{
+    position: absolute;
+    width: 98px;
+    background-color:transparent;
+    height: 4px;
+    top: 71px;
+    transition: 0.5s;
+    left:234px;
+
+}
+
+.navbar-logo{
+padding: 8px
+}
+
+/* nav-bar */
+/*500px 이하에서 작동  min-width: 500px 면 500px이상에서 작동*/
+@media screen and (max-width: 500px)  {
+    body{
+        width: 700px;
+    }
+
+}
+
+
+/*jumbotron*/
+section.jumbotron{
+    /*background-image: url("/images/Jumbotron.jpg");*/
+    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("/images/Jumbotron.jpg") center center;
+    background-size: cover;
+    height: 400px;
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    width: 100%;
+    opacity: 80%;
+    background-attachment: fixed;
+
+}
+section.jumbotron .container{
+    font-weight: 1000;
+    position: absolute;
+    left:0px;
+    font-size: 2.2rem;
+    text-shadow: black 0.1em 0.1em;
+    color: aliceblue;
+    height:150px;
+
+}
+section.jumbotron .container i{
+    position: absolute;
+    left: 650px;
+    top:200px;
+    font-size: 2.5rem;
+}
+
+section.jumbotron .container h1{
+    font-weight: 1000;
+}
+
+
+
+@keyframes slide-ani-jumbotron {
+
+}
+
+/*jumbotron*/
+
+/*<!--Floating Portfolio Link-->*/
+.toPortfolio img{
+    height:150px;
+    width: 150px;
+}
+.toPortfolio{
+    z-index:1000;
+    position: fixed;
+    top:200px;
+    right:5px;
+
+}
+/*<!--Floating Portfolio Link-->*/
+
+/*main */
+section.main{
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+}
+
+section.main .container{
+
+}
+
+section.main .container .row .main-content .card{
+    background-image: url("images/usefulWebsite.jpg");
+  height: 400px;
+}
+section.main .container .row .main-content .card .card-body .card-text{
+    margin-bottom: 0rem;
+    height: 6.2rem;
+}
+section.main .container .row .main-content .card img{
+    height:220px;
+    border-radius: 5px;
+}
+
+
+/*main */
+
+/*hot_contents*/
+section.hot_contents{
+
+}
+section.hot_contents .container .row .col-sm-6{
+
+}
+#carouselExampleSlidesOnly {
+    margin-bottom: 1rem;
+    border-radius: 20px;
+}
+
+#carouselExampleSlidesOnly img {
+    height: 350px;
+    border-radius: 20px;
+}
+
+/*hot_contents*/
+
+/* Footer */
+.about-us{
+color: #fff;
+}
+
+.about-us p{
+    font-size: 0.7rem;
+    font-weight: normal;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.about-us i{
+    font-size: 1.3rem;
+    margin: 1rem 0.5rem;
+}
+
+.services{
+color: #fff;
+}
+.services li{
+    font-size: 1rem;
+    font-weight: normal;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: left;
+    line-height: 200%;
+}
+.question{
+    text-align: left;
+    color: #fff;
+}
+.question span{
+    font-size: 0.8rem;
+}
+/* Footer */
+
+/*reply*/
+section .card .card-header {
+    display: flex;
+    padding: 0.25rem 0.25rem;
+    /*justify-content: space-between;*/
+}
+
+section .card .card-body{
+    padding: 0.25rem 0.25rem;
+}
+
+section .card .card-header .button-group{
+    margin-left: auto;
+}
+
+section.reply h3{
+    margin: 1rem 1rem;
+}
+/*reply*/
+
+
+/*login 화면*/
+section.login-main{
+    padding-top: 5rem;
+}
+
+/*login 화면*/
+
+/*middle Background*/
+section .bg{
+    background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("/images/Jumbotron.jpg") center center;
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+    opacity: 80%;
+    background-attachment: fixed;
+}
+/*middle Background*/
+
+/*saveForm CSS*/
+section.saveForm{
+ background-image: url("images/boardImage.jpg");
+    background-size: cover;
+}
+
+/*saveForm CSS*/
+
+/*postList*/
+section.postList{
+    background-image: url("images/postListBg.png");
+    background-size: cover;
+}
+section.postList .container{
+    height: 600px;
+}
+section.postList .container .table{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 5rem;
+}
+/*postList*/

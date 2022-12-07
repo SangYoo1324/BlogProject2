@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width" />
+<title>Example</title>
+<!-- include libraries(jQuery, bootstrap) -->
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<!-- include summernote css/js-->
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+</head>
+<body>
+	<form id="articleForm" role="form" action="/article" method="post">
+		<br style="clear: both">
+		<h3 style="margin-bottom: 25px;">Article Form</h3>
+		<div class="form-group">
+			<input type="text" class="form-control" id="title" name="title"
+				placeholder="title" required>
+		</div>
+		<div class="form-group">
+			<textarea class="form-control summernote" id="content" name="content"
+				placeholder="content" maxlength="140" rows="7"></textarea>
+		</div>
+		<button id="btn-submit-article" name="submit"
+			class="btn btn-primary pull-right">Submit Form</button>
+	</form>
+	<script>
+		$(document).ready(function() {
+			$('.summernote').summernote({
+				height : 300,
+				minHeight : null,
+				maxHeight : null,
+				focus : true,
+				callbacks : {
+					onImageUpload : function(files) {
+						for (var i = 0; i < files.length; i++) {
+							sendFile(files[i], this);
+						}
+                        // sendFile(image[0]);
+					}
+				}
+			});
+		});
+
+		function sendFile(file, el) {
+			var form_data = new FormData();
+			form_data.append('file', file); // html form 형태로 파일을 담음
+			$.ajax({
+				data : form_data,
+				type : "POST",
+				url : '/image', // imageApiController로 보냄
+				cache : false,
+				contentType : false,
+				enctype : 'multipart/form-data', // 인코딩할때 multipart로 인코딩 and form-data
+				processData : false,
+				success : function(url) {
+                    console.log(url);
+					$(el).summernote('insertImage', url //url= image/{id} => 실행되면서 resource(파일경로 가져옴)
+                            ,
+                            function(images) { // el = textarea
+
+                        console.log(el);
+						images.css('width', "50%");
+					}
+                    );
+
+				}
+			});
+		}
+	</script>
+    <script>
+        $("#btn-submit-article").on("click",()=>{
+            let data={
+                title: $("#title").val(),
+                content: $("#content").summernote('code')
+            };
+            $.ajax({
+                type: "POST",
+                url: "/article/post",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType:"json"
+            }).done(function (response){
+                location.href="/article/list"
+                alert("Posted");
+
+            }).fail(function(error){
+                alert("포스팅 실패");
+            });
+        });
+    </script>
+    <script src="/js/bootstrapJS/bootstrap.bundle.js"></script>
+</body>
+</html>

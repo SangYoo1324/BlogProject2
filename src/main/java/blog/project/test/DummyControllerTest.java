@@ -25,7 +25,7 @@ public class DummyControllerTest {
     @PostMapping("dummy/join")
             public String join(@RequestBody Users user){
     log.info("join 정보: 아이디: "+user.getUsername()+" 패스워드: "+user.getPassword());
-    user.setRole(RoleType.valueOf("USER"));
+    user.setRoles(RoleType.valueOf("USER"));
     userRepository.save(user);
         return "회원가입이 완료되었습니다";
     }

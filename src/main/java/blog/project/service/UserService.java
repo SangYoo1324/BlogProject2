@@ -20,7 +20,7 @@ public class UserService {
     @Transactional
     public Users signup(UserDto userDto){
         Users user = userDto.toEntiy();
-        user.setRole(RoleType.USER);//RoleType은 자동 생성이 안되서 일단 강제로 넣어줌
+        user.setRoles(RoleType.USER);//RoleType은 자동 생성이 안되서 일단 강제로 넣어줌
         try{
              userRepository.save(user);
              return user;

@@ -30,19 +30,19 @@
 <body>
 {{>layouts/header}}
 
-<main>
+<section class="main saveForm">
  <form>
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Tilte</label>
+    <div class="mb-3 w-90">
+        <label for="exampleFormControlInput1" class="form-label font-weight-bold text-white"><h2>Tilte</h2></label>
         <input type="text" class="form-control" id="title" placeholder="Write Contents">
     </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Contents</label>
+    <div class="mb-3 w-90">
+        <label for="exampleFormControlTextarea1" class="form-label font-weight-bold text-white"><h2>Contents</h2></label>
         <input id="content" name="contentslot" type="text" class="form-control summernote">
     </div>
  </form>
-    <button id="btn-post" class="btn btn-primary">Post</button>
-</main>
+    <button id="btn-post" class="btn btn-primary ml-7">Post</button>
+</section>
 
 <!--{{>layouts/footer}}-->
 <script src="/js/board.js"></script>
@@ -51,20 +51,45 @@
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
 <script>
-      $('.summernote').summernote({
-        placeholder: 'Hello stand alone ui',
-        tabsize: 2,
-        height: 120,
-        toolbar: [
-          ['style', ['style']],
-          ['font', ['bold', 'underline', 'clear']],
-          ['color', ['color']],
-          ['para', ['ul', 'ol', 'paragraph']],
-          ['table', ['table']],
-          ['insert', ['link', 'picture', 'video']],
-          ['view', ['fullscreen', 'codeview', 'help']]
-        ]
-      });
-    </script>
+    $(document).ready(function() {
+        $('.summernote').summernote({
+            height : 300,
+            minHeight : null,
+            maxHeight : null,
+            focus : true,
+            callbacks : {
+                onImageUpload : function(files) {  //이미지가 업로드 될때만 발동되는 함수형 객체
+                    for (var i = 0; i < files.length; i++) {
+                        sendFile(files[i], this);  //this =  <textarea class="form-control summernote" id="content" name="content" placeholder="content" maxlength="140" rows="7" style="display: none;"></textarea>
+                    }
+
+                }
+            }
+        });
+    });
+
+    function sendFile(file, el){
+        var form_data = new FormData();
+        form_data.append('file',file);  // html form 형태로 파일을 담음 append(name, element)
+        $.ajax({
+            data: form_data,
+            type: "POST",
+            url: '/file',
+            cache: false,
+            contentType: false,
+            enctype : 'multipart/form-data', // 인코딩할때 multipart로 인코딩 and form-data
+            processData : false,
+            success: function(url){// url = ajax통신 종료 후 받는 리턴 객체( 리포지토리에서 받아온 이미지) 주소
+                // 주소는 getmapping함수 serveFile과 연결되고 servefile은 이미지 json data를 리턴함
+                console.log(url);
+                $(el).summernote('insertImage',url, function(file){
+                    file.css('width',"50%");
+                });
+
+            }
+        })
+
+    }
+</script>
 </body>
 </html>

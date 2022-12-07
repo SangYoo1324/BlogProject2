@@ -43,7 +43,7 @@ public class Reply {
     }
 
     public ReplyDto toDto() {
-       return new ReplyDto(this.reply_id,this.content, this.board.getBoard_id(),this.user.getUser_id(), this.create_date);
+       return new ReplyDto(this.reply_id,this.content, this.board.getBoard_id(),this.user, this.create_date);
     }
 
     public Reply patch(ReplyDto patchDto, Long reply_id) {

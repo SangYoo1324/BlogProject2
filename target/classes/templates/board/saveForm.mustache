@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="En">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap.css">
+    <link rel="stylesheet" href="/bootstrap.min.css">
+    <!--    JQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<!--    Summernote-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+
+
+
+<!--    fontAwsome-->
+    <script src="https://kit.fontawesome.com/edff7358ca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+    <title>document</title>
+</head>
+<body>
+{{>layouts/header}}
+
+<section class="main saveForm">
+ <form>
+    <div class="mb-3 w-90">
+        <label for="exampleFormControlInput1" class="form-label font-weight-bold text-white"><h2>Tilte</h2></label>
+        <input type="text" class="form-control" id="title" placeholder="Write Contents">
+    </div>
+    <div class="mb-3 w-90">
+        <label for="exampleFormControlTextarea1" class="form-label font-weight-bold text-white"><h2>Contents</h2></label>
+        <input id="content" name="contentslot" type="text" class="form-control summernote">
+    </div>
+ </form>
+    <button id="btn-post" class="btn btn-primary ml-7">Post</button>
+</section>
+
+<!--{{>layouts/footer}}-->
+<script src="/js/board.js"></script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.summernote').summernote({
+            height : 300,
+            minHeight : null,
+            maxHeight : null,
+            focus : true,
+            callbacks : {
+                onImageUpload : function(files) {  //이미지가 업로드 될때만 발동되는 함수형 객체
+                    for (var i = 0; i < files.length; i++) {
+                        sendFile(files[i], this);  //this =  <textarea class="form-control summernote" id="content" name="content" placeholder="content" maxlength="140" rows="7" style="display: none;"></textarea>
+                    }
+
+                }
+            }
+        });
+    });
+
+    function sendFile(file, el){
+        var form_data = new FormData();
+        form_data.append('file',file);  // html form 형태로 파일을 담음 append(name, element)
+        $.ajax({
+            data: form_data,
+            type: "POST",
+            url: '/file',
+            cache: false,
+            contentType: false,
+            enctype : 'multipart/form-data', // 인코딩할때 multipart로 인코딩 and form-data
+            processData : false,
+            success: function(url){// url = ajax통신 종료 후 받는 리턴 객체( 리포지토리에서 받아온 이미지) 주소
+                // 주소는 getmapping함수 serveFile과 연결되고 servefile은 이미지 json data를 리턴함
+                console.log(url);
+                $(el).summernote('insertImage',url, function(file){
+                    file.css('width',"50%");
+                });
+
+            }
+        })
+
+    }
+</script>
+</body>
+</html>

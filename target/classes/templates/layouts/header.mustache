@@ -1,0 +1,72 @@
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg bg-dark position-fixed">
+    <div id="horizontal-underline"></div>
+{{#user}}
+    <div class="container-fluid">
+        <div class="navbar-logo">
+            <a id="write" data-status="" class="navbar-brand" href="/board/main/{{username}}"><i class="fa-solid fa-blog mr-2"></i>&nbsp &nbspHI, {{username}}</a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a id="write" data-status="=" class="nav-link active text-white" aria-current="page" href="/board/saveForm/{{username}}">Write</a>
+                </li>
+                <li class="nav-item">
+                    <a id="logout" data-status="" class= "nav-link text-white" href="/board/main">Sign Out</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown
+                    </a>
+                    <ul class="dropdown-menu bg-dark">
+                        <li><a class="dropdown-item text-white" href="/board/postList/{{username}}">Dashboard</a></li>
+                        <li><a class="dropdown-item text-white" href="/user/updateForm/{{username}}">Account MNG</a></li>
+                        <li><hr class="dropdown-divider text-white"></li>
+                        <li><a class="dropdown-item text-white" href="#">Admin Setting</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <input type="hidden" id="username" value="{{username}}">
+{{/user}}
+    {{^user}}
+        <div class="container-fluid">
+            <div class="navbar-logo">
+                <a id="write" data-status="" class="navbar-brand" href="/board/main"><i class="fa-solid fa-blog mr-2"></i>Sam's Blog</a>
+                </div>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a id="login" data-status="" class="nav-link active text-white" aria-current="page" href="/user/loginForm">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="signup" data-status="" class= "nav-link text-white" href="/user/joinForm">Sign-Up</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu bg-dark">
+                            <li><a class="dropdown-item text-white" href="#">Action</a></li>
+                            <li><a class="dropdown-item text-white" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider text-white"></li>
+                            <li><a class="dropdown-item text-white" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {{/user}}
+</nav>
+<div id="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+<!-- navbar -->

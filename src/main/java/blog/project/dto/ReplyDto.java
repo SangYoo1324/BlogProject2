@@ -18,14 +18,15 @@ public class ReplyDto {
     private Long reply_id;//auto
     private String content;
     private Long board_id;//ManyToOne join column:board_id
-    private Long user_id;//ManyToOne join column: user_id
+
+    private Users user;//ManyToOne join column: user_id
     private Timestamp create_date; //auto
 
-    public ReplyDto(Long reply_id, String content, Long board_id, Long user_id, Timestamp create_date) {
+    public ReplyDto(Long reply_id, String content, Long board_id, Users user, Timestamp create_date) {
         this.reply_id = reply_id;
         this.content = content;
         this.board_id =  board_id;
-        this.user_id = user_id;
+        this.user = user;
         this.create_date = create_date;
     }
 

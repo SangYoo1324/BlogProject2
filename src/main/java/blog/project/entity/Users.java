@@ -26,8 +26,8 @@ public class Users {
     private String email;
 
     @Column
-//    @Enumerated(EnumType.STRING)
-    private RoleType role;
+   @Enumerated(EnumType.STRING)
+    private RoleType roles;
 @CreationTimestamp//시간 자동 입력
     private Timestamp create_date;
 

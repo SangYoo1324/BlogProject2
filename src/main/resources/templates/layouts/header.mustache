@@ -3,7 +3,9 @@
     <div id="horizontal-underline"></div>
 {{#user}}
     <div class="container-fluid">
-        <a id="welcome" data-status="=" class="navbar-brand" href="/board/main/{{username}}"><i class="fa-solid fa-blog"></i> &nbsp &nbspHI, {{username}}</a>
+        <div class="navbar-logo">
+            <a id="write" data-status="" class="navbar-brand" href="/board/main/{{username}}"><i class="fa-solid fa-blog mr-2"></i>&nbsp &nbspHI, {{username}}</a>
+        </div>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -33,7 +35,10 @@
 {{/user}}
     {{^user}}
         <div class="container-fluid">
-            <a id="write" data-status="" class="navbar-brand" href="/board/main"><i class="fa-solid fa-blog mr-2"></i>Sam's Blog</a>
+            <div class="navbar-logo">
+                <a id="write" data-status="" class="navbar-brand" href="/board/main"><i class="fa-solid fa-blog mr-2"></i>Sam's Blog</a>
+                </div>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fa-solid fa-bars"></i>
             </button>

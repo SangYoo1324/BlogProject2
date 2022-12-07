@@ -8,6 +8,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="/bootstrap.css">
     <link rel="stylesheet" href="/bootstrap.min.css">
+
+
     <!--    JQuery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -18,36 +20,156 @@
 </head>
 <body>
 {{>layouts/header}}
+<!--jumbotron-->
+<section class="jumbotron">
 
-<main>
+        <div class="container">
+            <h1 class="text-center">Web Developing Archive</h1>
+            <p class="text-center">Self Archiving storage for web developing</p>
+            <p class="text-center var-sentence"></p>
+           <i class="fa-solid fa-circle-arrow-down"></i>
+        </div>
+
+
+</section>
+<!--jumbotron-->
+
+<!--Floating Portfolio Link-->
+<div class="toPortfolio">
+    <a href="https://sangbeomyooportfoliosite.netlify.app/"><img  src="/images/JumboAnimationPic.png" alt="">
+        <h4>To Portfolio Website</h4></a>
+</div>
+    <!--Floating Portfolio Link-->
+
+<!--Useful Websites-->
+<section class="main">
     <div class="container">
-        <div class="card" style="width: 100%;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="title">
+            <h4>Useful Website For Web developing</h4>
+            <h2>Publish your website to show off your skill-set to employers! </h2>
+        </div>
+        <div class="row">
+            <div class="col col-12 col-sm-4 main-content">
+                <div class="card" style="width: 100%;">
+                    <img src="/images/stackoverflow logo.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Stack Overflow</h5>
+                        <p class="card-text">90% of Questions happen during coding can be solved by Stack-OverflowING. Be familiar with StackOverflow!</p>
+                        <a href="#" class="btn btn-outline-light">Go and Search!</a>
+                    </div>
+                </div>
 
+            </div>
+            <div class="col col-12 col-sm-4 main-content">
+                <div class="card" style="width: 100%;">
+                    <img src="/images/elasticbeanstalk.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Elastic Banstalk</h5>
+                        <p class="card-text">One of the versatile back-end based publishing tool served by AWS. Biggest merit of Elastic beanstalk ::easy to configure! Publish your own website and be successful on Job hunting!</p>
+                        <a href="#" class="btn btn-outline-light">Go To AWS!</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-12 col-sm-4 main-content">
+                <div class="card" style="width: 100%;">
+                    <img src="/images/netlify.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Netlify</h5>
+                        <p class="card-text">Easiest Front-end website publishing tool. You can just link your git-hub repository. Build your front-end website
+                            with Html,css,javascript and publish it to show your front-end skillset!</p>
+                        <a href="#" class="btn btn-outline-light">Go To Netlify!</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+</section>
+
+<!--Useful Websites-->
+
+<!--middle background-->
+<section><div class="bg"></div></section>
+<!-- middle background-->
+
+
+<!--slideshow // hot postings-->
+<section class="hot_contents">
     <div class="container">
-        <div class="card" style="width: 100%;">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="title">
+                    <h4>Graphical Support</h4>
+                    <h2>Snapshot for Postings from Dashboard </h2>
+                </div>
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="/images/java_meme1.jpg" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+<!--                                    <h5>First slide label</h5>-->
+<!--                                    <p>Some representative placeholder content for the first slide.</p>-->
+                                </div>
+                            </div>
+                            {{#files}}
+                            <div class="carousel-item">
+<!--                                http://samblogproject-env.eba-eqdiwaau.us-west-2.elasticbeanstalk.com/-->
+<!--                                http://localhost:5000/file/-->
+                                <img src="http://samblogproject-env.eba-eqdiwaau.us-west-2.elasticbeanstalk.com/file/{{id}}" class="d-block w-100" alt="...">
+                                <div class="carousel-caption d-none d-md-block">
+<!--                                    <h5>First slide label</h5>-->
+<!--                                    <p>Some representative placeholder content for the first slide.</p>-->
+                                </div>
+                            </div>
+                            {{/files}}
+
+                        </div>
+                    </div>
+                </div>
+            <div class="col-sm-6">
+                <div class="title">
+                    <h4>Hot Posts of this Month</h4>
+                    <h2>Based On Hits! </h2>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Poster</th>
+                        <th scope="col">Views</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#TopBoard}}
+                    <tr>
+                        <th scope="row">{{board_id}}</th>
+                        <td>{{title}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{count}}</td>
+                    </tr>
+                    {{/TopBoard}}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
-</main>
+
+
+</section>
+
 
 
 
 <!--{{>layouts/footer}}-->
 <script src="/js/user.js"></script>
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<script src="/js/display.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!--<script src="/js/bootstrapJS/bootstrap.bundle.min.js"></script>-->
+<!--&lt;!&ndash; Option 1: Bootstrap Bundle with Popper &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>-->
 
 
 </body>

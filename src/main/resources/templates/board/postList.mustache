@@ -30,32 +30,36 @@
 <body>
 {{>layouts/header}}
 
-<main>
+<section class="main postList">
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Poster</th>
+                <th scope="col">Views</th>
+                <th scope="col">Post Date</th>
+            </tr>
+            </thead>
+            {{#board}}
+                <tbody>
+                <tr>
+                    <th id="post-id"scope="row">{{board_id}}</th>
+                    <td id="title"><a class="show-post-btn" href="show/{{username}}/{{board_id}}">{{title}}</a></td>
+                    <!--          -->
+                    <td id="poster">{{{user.username}}}</td>
+                    <td id="count">{{{count}}}</td>
+                    <td id="post-date">{{create_date}}</td>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Poster</th>
-            <th scope="col">Post Date</th>
-        </tr>
-        </thead>
-        {{#board}}
-        <tbody>
-        <tr>
-            <th id="post-id"scope="row">{{board_id}}</th>
-            <td id="title"><a class="show-post-btn" href="show/{{username}}/{{board_id}}">{{title}}</a></td>
-<!--          -->
-            <td id="poster">{{{user.username}}}</td>
-            <td id="post-date">{{create_date}}</td>
+                </tr>
+                </tbody>
+            {{/board}}
+        </table>
+    </div>
 
-        </tr>
-        </tbody>
-        {{/board}}
-    </table>
 
-</main>
+</section>
 
 <!--{{>layouts/footer}}-->
 <script src="/js/board.js"></script>

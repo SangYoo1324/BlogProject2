@@ -1,11 +1,16 @@
 package blog.project.controller;
 
+import blog.project.dto.BoardDto;
+import blog.project.dto.FileDto;
 import blog.project.dto.ReplyDto;
 import blog.project.entity.Board;
+import blog.project.entity.File;
 import blog.project.entity.Users;
 import blog.project.repository.UserRepository;
 import blog.project.service.BoardService;
+import blog.project.service.FileService;
 import blog.project.service.ReplyService;
+import blog.project.service.ViewCountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +31,12 @@ public class BoardController {
     private BoardService boardService;
     @Autowired
     private ReplyService replyService ;
+
+    @Autowired
+    private FileService fileService;
+
+    @Autowired
+    private ViewCountService viewCountService;
     //메인화면
     @GetMapping("/board/main")
     public String index(Model model) {
@@ -37,7 +48,17 @@ public class BoardController {
     @GetMapping("/board/main/{username}")
     public String index(Model model,@PathVariable String username) {
         Users loggedinUser = userRepository.findByUsername(username);
-        log.info("메인화면으로 이동하였습니다"+loggedinUser.getUsername());
+        log.info("메인화면으로 이동하였습니다" + loggedinUser.getUsername());
+        // 게시글에 등록된 이미지들 슬라이드쇼에 등록
+        List<FileDto> imgs = fileService.multipleLoad();
+        for (FileDto s : imgs) {
+            log.info(s.getRelPath());
+        }
+//        if(imgs.isEmpty()==false){// imgs 가 empty가 아닐 때만  add 해라(mustache embedded logic)
+        model.addAttribute("files", imgs);
+//    }
+        List<BoardDto> boardList = boardService.topFourPosts();
+        model.addAttribute("TopBoard", boardList);
         if(isLoggedIn== true)
         model.addAttribute("user",loggedinUser );
 
@@ -74,7 +95,8 @@ public class BoardController {
 @GetMapping("board/postList/show/{username}/{board_id}")
     public String showPost(Model model,@PathVariable String username, @PathVariable Long board_id){
     if(isLoggedIn== true){
-        model.addAttribute("user", userRepository.findByUsername(username));
+        viewCountService.updateView(board_id);   // view++
+        model.addAttribute("currentUser", userRepository.findByUsername(username));
         Board target =  boardService.post(board_id);
         model.addAttribute("target", target);
         List<ReplyDto> replies = replyService.replyList(board_id);
