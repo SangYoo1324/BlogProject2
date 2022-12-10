@@ -40,6 +40,17 @@ public class BoardController {
     //메인화면
     @GetMapping("/board/main")
     public String index(Model model) {
+        // 게시글에 등록된 이미지들 슬라이드쇼에 등록
+        List<FileDto> imgs = fileService.multipleLoad();
+        for (FileDto s : imgs) {
+            log.info(s.getRelPath());
+        }
+//        if(imgs.isEmpty()==false){// imgs 가 empty가 아닐 때만  add 해라(mustache embedded logic)
+        model.addAttribute("files", imgs);
+//    }
+        //4 hot post section
+        List<BoardDto> boardList = boardService.topFourPosts();
+        model.addAttribute("TopBoard", boardList);
 
 
         return "index";
@@ -57,6 +68,7 @@ public class BoardController {
 //        if(imgs.isEmpty()==false){// imgs 가 empty가 아닐 때만  add 해라(mustache embedded logic)
         model.addAttribute("files", imgs);
 //    }
+        //4 hot post section
         List<BoardDto> boardList = boardService.topFourPosts();
         model.addAttribute("TopBoard", boardList);
         if(isLoggedIn== true)

@@ -185,6 +185,8 @@ $("#modal-title").val($("#btn-edit").attr("data-post-title"));
 $("#modal-content").summernote('code',$("#btn-edit").attr("data-post-content"));
 };
 
+
+//이 reply modal fill 왜 썼는지 모르겠음... prob unnecessary code
 //Reply Modal fill
 function replyModalFill(){
     $("#reply-modal-content").summernote('code',$("#reply-btn-edit").attr("data-reply-content"));

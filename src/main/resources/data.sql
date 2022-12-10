@@ -26,3 +26,7 @@ values
     ('asdfasdfasdfasd','2017-07-20',2,1),
     ('asdfasdfasdfasd','2017-07-20',2,1);
 
+-- create user 'cos'@'%' identified by 'cos1234';
+--     grant all privileges on *.* to 'cos'@'%';
+--         create database security;
+--             use security;

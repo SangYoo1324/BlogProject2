@@ -16,7 +16,7 @@ section{
     position: relative;
     font-family: 'Poppins', sans-serif;
     padding: 5rem 0;
-    width: 100%;
+
 
     /*padding: 3rem 3rem;*/
 }
@@ -30,7 +30,7 @@ section:nth-child(2n){
     margin-bottom: 3rem;
     position: relative;
     opacity: 0;
-    transition: all 3s;
+    transition: all 1.5s;
     /* animation: slide 1.5s ease-in-out; */
 
 }
@@ -165,21 +165,26 @@ padding: 8px
 }
 
 /* nav-bar */
-/*500px 이하에서 작동  min-width: 500px 면 500px이상에서 작동*/
-@media screen and (max-width: 500px)  {
+/*500px 이하에서 작동  ///min-width: 500px 면 500px이상에서 작동*/
+@media screen and (max-width: 501px)  {
     body{
         width: 700px;
     }
-
+    container{
+        width:700px;
+    }
 }
 
+/*@media screen and (max-width: 501px) {*/
 
+/* */
+/*}*/
 /*jumbotron*/
 section.jumbotron{
     /*background-image: url("/images/Jumbotron.jpg");*/
     background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("/images/Jumbotron.jpg") center center;
     background-size: cover;
-    height: 400px;
+    height: 430px;
     display: flex;
     /*justify-content: center;*/
     align-items: center;
@@ -200,9 +205,10 @@ section.jumbotron .container{
 }
 section.jumbotron .container i{
     position: absolute;
-    left: 650px;
-    top:200px;
+    left: 46%;
+    top:230px;
     font-size: 2.5rem;
+    animation: upDown 1s ease-in-out infinite;
 }
 
 section.jumbotron .container h1{
@@ -211,22 +217,30 @@ section.jumbotron .container h1{
 
 
 
-@keyframes slide-ani-jumbotron {
-
+@keyframes upDown {
+    0%{
+        top: 230px;
+    }
+    50%{
+        top: 245px;
+    }
+    100%{
+        top: 230px;
+    }
 }
 
 /*jumbotron*/
 
 /*<!--Floating Portfolio Link-->*/
 .toPortfolio img{
-    height:150px;
-    width: 150px;
+    height:100px;
+    width: 100px;
 }
 .toPortfolio{
     z-index:1000;
     position: fixed;
-    top:200px;
-    right:5px;
+    top:230px;
+    left:5px;
 
 }
 /*<!--Floating Portfolio Link-->*/
@@ -242,12 +256,18 @@ section.main .container{
 }
 
 section.main .container .row .main-content .card{
-    background-image: url("images/usefulWebsite.jpg");
+    background-color: #1e2125;
   height: 400px;
 }
 section.main .container .row .main-content .card .card-body .card-text{
+    font-weight: bold;
+    color: white;
     margin-bottom: 0rem;
     height: 6.2rem;
+}
+section.main .container .row .main-content .card .card-body .card-title{
+    color: white;
+    font-weight: bold;
 }
 section.main .container .row .main-content .card img{
     height:220px;
