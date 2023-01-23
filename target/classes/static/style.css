@@ -115,6 +115,30 @@ margin-right: 1rem;
 }
 /* global */
 
+/*snowflake*/
+.snowflake{
+    width: 10px;
+    height:10px;
+    border-radius: 50%;
+    background-color: white;
+    position:absolute;
+    z-index: 1000;
+    top:-150px;
+
+    /*generate on display.js*/
+    /*animation: fall 10s linear;*/
+
+}
+@keyframes fall {
+    from{
+
+    }to{
+        transform:translateY(70vh);
+    opacity:0;
+         }
+}
+
+/*snowflake*/
 /* nav-bar */
 .navbar{
 
@@ -122,10 +146,29 @@ margin-right: 1rem;
     position: fixed;
     font-size: 1.5rem;
     width: 100%;
-    z-index:1000;
+    z-index:1;
+
 
 
 }
+
+.navbar-toggler{
+    color: aliceblue;
+    outline: 1px;
+}
+.navbar-toggler:hover{
+    background-color: burlywood;
+    box-shadow: 0 0 0 0.1rem;
+}
+
+/*.navbar-toggler:focus{*/
+/*    background-color: burlywood;*/
+/*    box-shadow: 0 0 0 0.1rem;*/
+/*}*/
+
+/*.navbar-toggler:not(focus-visible){*/
+/*    box-shadow: 0 0 0 0.0px;*/
+/*}*/
 
 .navbar-brand{
     color: white;
