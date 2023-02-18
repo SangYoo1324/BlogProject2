@@ -7,7 +7,7 @@
 Personal side project. This is my second back-end website release with spring framework. Compared to first project, lots of features had been added and improved. Please check the Feature tab below to check comparison.
 
 ## Feature
-* mark represents the newly- added or improved feature from the first project.
+"*" mark represents the newly- added or improved feature from the first project.
 
 - Only registered user can access to Dashboard CRUD.(Backend)
 - Comments also enabled.(Backend)
