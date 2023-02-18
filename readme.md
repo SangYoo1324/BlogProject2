@@ -1,12 +1,22 @@
-# Project Title
+# Blog project
 
 
 
 ## Description
 
-Imported PcAssemblyShop project(School project) which is front-end only, and upgrade it into a web-project with back-end framework.
+Personal side project. This is my second back-end website release with spring framework. Compared to first project, lots of features had been added and improved. Please check the Feature tab below to check comparison.
 
-## Getting Started
+## Feature
+* mark represents the newly- added or improved feature from the first project.
+
+- Only registered user can access to Dashboard CRUD.(Backend)
+- Comments also enabled.(Backend)
+* Image can also be uploaded (Backend)
+* Images' reference also stored in db with custom UUID method. (Backend)
+* Dashboard view count also calculated and reflected.
+-website animation(Frontend) 
+-website become more responsive using media query. 
+
 
 ### Dependencies
 
@@ -22,7 +32,7 @@ Backend
 * Ajax
 * Heroku-postgresql
 * JPA
-* Spring security
+* Spring security (Currently running with my custom register methods)
 
 
 
@@ -45,7 +55,7 @@ Sangbeom Yoo    [@SangYoo1324](https://sangbeomyooportfoliosite.netlify.app/)
 
 * 0.2
     * Various bug fixes and optimizations
-    * Google-Login function updated
+    * Login feature updated
 * 0.1
     * Initial Release
 
