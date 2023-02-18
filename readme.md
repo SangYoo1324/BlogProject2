@@ -15,6 +15,8 @@ FrontEnd
 * Tailwind
 * Jquery
 * VanilaJS
+
+
 Backend
 * Spring Framework
 * Ajax
